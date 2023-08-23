@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const {
   signUp,
   getUsers,
@@ -19,7 +18,7 @@ router.post("/", signUp);
 router.put("/", updateUser);
 router.delete("/", deleteUser);
 
-// Definimos nuevamente las rutas, pero esta vez van a pasar por una autentificación antes de realizar alguna acción
+// Definimos nuevamente las rutas, pero esta vez van a pasar por una autenticación antes de realizar alguna acción
 router.post("/login", login);
 router.get("/:_id", auth, getUserById);
 router.delete("/:_id", auth, deleteUserById);

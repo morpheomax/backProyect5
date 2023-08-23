@@ -2,9 +2,18 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: false,
+    },
+    lastname: {
+      type: String,
+      required: false,
+    },
+
     username: {
       type: String,
-      required: true,
+      required: false,
       validate: {
         validator: function (v) {
           return /^[a-zA-Z0-9 ]{3,30}$/.test(v);
@@ -30,6 +39,26 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    addressNumber: {
+      type: Number,
+      required: false,
+    },
+    commune: {
+      type: String,
+      required: false,
+    },
+    city: {
+      type: String,
+      required: false,
+    },
+    reference:{
+      type:String,
+      required: false,
+    },
+    postalcode: {
+      type: Number,
+      required: false,
+    },
     phone: {
       type: Number,
       required: false,
@@ -37,16 +66,9 @@ const UserSchema = new mongoose.Schema(
     rol: {
       type: String,
       required: false,
-    },
-    premium: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    dob: {
-      type: Date,
-      required: false,
-    },
+      default: "usuario",
+    }
+   
   },
   {
     timestamps: true,

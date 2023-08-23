@@ -1,29 +1,45 @@
 require("dotenv").config();
-require("./models/User.model");
-const userRoutes = require("./routes/User.routes");
 const mongoose = require("mongoose");
-const cors = require("cors");
-mongoose.connect(process.env.MONGO_URI + "tienda");
-
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
+const port = process.env.PORT || 3000; // Puerto por defecto 3000 si no está definido en las variables de entorno
 
-const port = process.env.PORT;
-
-const corsOptions = {
-  // origin: * // se utiliza asterisco cuando queremos que se acceda desde todo el mundo
-  // Restingimos acceso segun nuestros puertos
-  origin: process.env.FRONTEND_URL,
-  optionsSuccessStatus: 200,
-};
-// *middleware
-// Cors (Recurso compartido de origen cruzado) restringe solicitudes de una ruta, es decir que podemos limitar el acceso de un server al nuestro
-app.use(cors(corsOptions));
-
-// Validar que los datos estan en formato JSON
+// Middleware
+app.use(cors()); // Habilitar CORS para todas las rutas
 app.use(express.json());
-// redirecciona al archivo User.routes
+
+// Conectar a MongoDB
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Conexión a MongoDB exitosa");
+  })
+  .catch((error) => {
+    console.error("Error de conexión a MongoDB:", error);
+  });
+
+// Importar modelos antes de las rutas
+require("./models/User.model");
+require("./models/Category.models"); // Corregido el nombre del modelo
+require("./models/Variants.models");
+require("./models/Product.models");
+
+// Importar rutas después de los modelos
+const userRoutes = require("./routes/User.routes");
+const categoryRoutes = require("./routes/Category.routes");
+const variantsRoutes = require("./routes/Variants.routes");
+const productRoutes = require("./routes/Product.routes");
+
+// Rutas
 app.use("/users", userRoutes);
+app.use("/categories", categoryRoutes);
+app.use("/variants", variantsRoutes);
+app.use("/products", productRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -31,7 +47,7 @@ app.get("/", (req, res) => {
   });
 });
 
-// Escucha el servidor siempre va al final del codigo
+// Escuchar en el puerto
 app.listen(port, () => {
-  console.log(`Servidor escuchando el puerto ${port}`);
+  console.log(`Servidor escuchando en el puerto ${port}`);
 });

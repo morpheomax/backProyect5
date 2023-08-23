@@ -24,23 +24,3 @@ const auth = expressjwt({
 });
 
 module.exports = auth;
-
-// *Codigo mejorado
-// require("dotenv").config();
-// const { expressjwt } = require("express-jwt");
-
-// const auth = expressjwt({
-//   secret: process.env.JWT_SECRET_KEY,
-//   algorithms: ["HS256"],
-//   userProperty: "user",
-//   getToken: (req) => {
-//     const { Authorization } = req.headers;
-//     if (Authorization) {
-//       const [type, token] = Authorization.split(" ");
-//       return ["Token", "Bearer"].includes(type) ? token : null;
-//     }
-//     return null;
-//   },
-// });
-
-// module.exports = auth;

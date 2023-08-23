@@ -44,6 +44,7 @@ const signUp = async (req, res) => {
   }
 };
 
+
 //Esta función recibe una solicitud (req) y una respuesta (res). Consulta todos los documentos de usuarios en la base de datos y devuelve una respuesta con el estado 200 (éxito) y los detalles de todos los usuarios en el cuerpo de la respuesta.
 const getUsers = async (req, res) => {
   try {
@@ -98,6 +99,7 @@ const deleteUser = async (req, res) => {
     });
   }
 };
+
 
 const login = async (req, res) => {
   const { email, password } = req.body;
