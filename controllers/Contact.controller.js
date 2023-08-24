@@ -3,17 +3,19 @@ const mongoose = require("mongoose");
 const Contact = mongoose.model("Contact");
 
 const createContact = async (req, res) => {
-  const { contact } = req.body;
-
+  const { name, email, message } = req.body;
+ 
   try {
     const contactDocument = new Contact({
-        contact,
+        name,
+        email,
+        message,
     });
     const response = await contactDocument.save();
 
     return res.status(201).json({
       message: "Contact created successfully",
-      variants: response,
+      contact: response,
     });
   } catch (err) {
     return res.status(500).json({
@@ -25,21 +27,15 @@ const createContact = async (req, res) => {
 
 const getAllContacts = async (req, res) => {
   try {
-    const contact = await Contact.find();
-
-    if (contact) {
-      return res.status(200).json({
-        message: "Contact found",
-        contact,
-      });
-    }
-    return res.status(404).json({
-      message: "Contact not found",
+    const response = await Contact.find();
+    return res.status(200).json({
+      message: "Ok",
+      detail: response,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(404).json({
       message: "Internal Server Error",
-      detail: err.message, 
+      detail: err,
     });
   }
 };
