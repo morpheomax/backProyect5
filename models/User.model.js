@@ -4,11 +4,11 @@ const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: false,
+      required: true,
     },
     lastname: {
       type: String,
-      required: false,
+      required: true,
     },
 
     username: {
@@ -61,7 +61,7 @@ const UserSchema = new mongoose.Schema(
     },
     phone: {
       type: Number,
-      required: false,
+      required: true,
     },
     rol: {
       type: String,

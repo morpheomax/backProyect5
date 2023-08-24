@@ -28,18 +28,21 @@ require("./models/User.model");
 require("./models/Category.models"); // Corregido el nombre del modelo
 require("./models/Variants.models");
 require("./models/Product.models");
+require("./models/Contact.models")
 
 // Importar rutas después de los modelos
 const userRoutes = require("./routes/User.routes");
 const categoryRoutes = require("./routes/Category.routes");
 const variantsRoutes = require("./routes/Variants.routes");
 const productRoutes = require("./routes/Product.routes");
+const contactRoutes = require("./routes/Contact.routes");
 
 // Rutas
 app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/variants", variantsRoutes);
 app.use("/products", productRoutes);
+app.use("/contact", contactRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
