@@ -11,7 +11,7 @@ const {
 } = require('../controllers/Contact.controller.js');
 
 // Rutas para Variantes
-router.post("/", auth, createContact); 
+router.post("/", createContact); 
 router.get("/", auth, getAllContacts); 
 router.delete("/:contactId", auth, deleteContactById); 
 
