@@ -6,12 +6,7 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    id: {
-      type: Number,
-      required: true,
-      unique: true,
-      autoIncrement: true, 
-    },
+   
     sku: {
       type: String,
       required: true,
@@ -40,11 +35,15 @@ const ProductSchema = new mongoose.Schema(
       type: String, 
       required: true,
     },
+    favorite:{
+      type:[String]
+    },
     img: [
       {
         type: String,
       },
     ],
+
   },
   {
     timestamps: true,

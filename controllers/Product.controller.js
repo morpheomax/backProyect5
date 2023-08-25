@@ -11,6 +11,7 @@ const createProduct = async (req, res) => {
     description,
     stock,
     variants,
+    favorite,
     img,
   } = req.body;
 
@@ -22,6 +23,7 @@ const createProduct = async (req, res) => {
       description,
       stock,
       variants,
+      favorite,
       img,
     });
 
@@ -131,10 +133,62 @@ const deleteProductById = async (req, res) => {
   }
 }
 
+
+// todos los favoritos
+
+const getFavorite = async (req, res) => {
+  try {
+    const response = await Product.find({favorite: true});
+    return res.status(200).json({
+      message: "Ok",
+      detail: response,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: "Internal Server Error",
+      detail: err,
+    });
+  }
+};
+
+// Actualizar favorito
+const updateFavoriteById = async (req, res) => {
+  const { productId } = req.params;
+  const { productUpdated } = req.body;
+
+  try {
+    const product = await Product.findByIdAndUpdate(
+      productId,
+      productUpdated,
+      { new: true }
+    );
+    if (product) {
+      return res.status(200).json({
+        message: "Product updated successfully",
+        product,
+      });
+    }
+    return res.status(404).json({
+      message: "Product not found",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Internal Server Error",
+      detail: err.message, 
+    });
+  }
+}
+
+
+
 module.exports = {
   createProduct,
   getProduct,
   getProductById,
   updateProductById,
   deleteProductById,
+
+
+  getFavorite,
+  updateFavoriteById,
 };
