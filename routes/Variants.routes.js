@@ -11,9 +11,9 @@ const {
 } = require('../controllers/Variants.controller');
 
 // Rutas para Variantes
-router.post("/", auth, createVariants); // Corregido el prefijo de la ruta ("/variants" a "/")
-router.get("/", getVariants); // Corregido el prefijo de la ruta ("/variants" a "/")
-router.put("/:variantsId", auth, updateVariants); // Corregido el prefijo de la ruta ("/variants" a "/")
-router.delete("/:variantsId", auth, deleteVariants); // Corregido el prefijo de la ruta ("/variants" a "/")
+router.post("/variants", auth, createVariants); // Corregido el prefijo de la ruta ("/variants" a "/")
+router.get("/variants", getVariants); // Corregido el prefijo de la ruta ("/variants" a "/")
+router.put("/variants/:variantsId", auth, updateVariants); // Corregido el prefijo de la ruta ("/variants" a "/")
+router.delete("/variants/:variantsId", auth, deleteVariants); // Corregido el prefijo de la ruta ("/variants" a "/")
 
 module.exports = router;

@@ -32,10 +32,18 @@ router.post("/", signUp);
 router.put("/", updateUser);
 router.delete("/", deleteUser);
 
+
+
 // Definimos nuevamente las rutas, pero esta vez van a pasar por una autenticación antes de realizar alguna acción
 router.post("/login", login);
 router.get("/:_id", auth, getUserById);
 router.delete("/:_id", auth, deleteUserById);
 router.put("/:_id", auth, updateUserById);
+
+// Verificamos el rol del usuario (confrimar si es correcto o lo quito)
+router.get("/admin", auth, checkRole(["SuperAdmin", "Admin"]), adminController.getAdminPage);
+router.get("/vendedor", auth, checkRole(["SuperAdmin", "Admin", "Vendedor"]), vendedorController.getVendedorPage);
+router.get("/user", auth, checkRole(["customer"]), vendedorController.getVendedorPage);
+
 
 module.exports = router;
