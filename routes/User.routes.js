@@ -12,6 +12,7 @@ const {
 } = require("../controllers/User.controller");
 const auth = require("../middlewares/auth");
 
+
 // Rutas de libre acceso CRUD
 router.get("/", getUsers);
 // Ruta para verificar si el correo electrónico ya está registrado
@@ -40,10 +41,10 @@ router.get("/:_id", auth, getUserById);
 router.delete("/:_id", auth, deleteUserById);
 router.put("/:_id", auth, updateUserById);
 
-// Verificamos el rol del usuario (confrimar si es correcto o lo quito)
-router.get("/admin", auth, checkRole(["SuperAdmin", "Admin"]), adminController.getAdminPage);
-router.get("/vendedor", auth, checkRole(["SuperAdmin", "Admin", "Vendedor"]), vendedorController.getVendedorPage);
-router.get("/user", auth, checkRole(["customer"]), vendedorController.getVendedorPage);
+// // Verificamos el rol del usuario (confrimar si es correcto o lo quito)
+// router.get("/admin", auth, checkRole(["SuperAdmin", "Admin"]), adminController.getAdminPage);
+// router.get("/vendedor", auth, checkRole(["SuperAdmin", "Admin", "Vendedor"]), vendedorController.getVendedorPage);
+// router.get("/user", auth, checkRole(["customer"]), vendedorController.getVendedorPage);
 
 
 module.exports = router;
