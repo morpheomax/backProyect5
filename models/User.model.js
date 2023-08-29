@@ -67,6 +67,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: false,
       default: "cliente",
+    },
+    premium: {
+      type: Boolean,
+         default: false,
     }
    
   },

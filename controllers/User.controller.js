@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 // Esta función recibe una solicitud (req) y una respuesta (res). Crea un nuevo documento de usuario en la base de datos utilizando el modelo de Mongoose y devuelve una respuesta con el estado 201 (creado) y los detalles del usuario creado en el cuerpo de la respuesta.
 const signUp = async (req, res) => {
   
-  const { name, lastname, username, email, password, address, addressNumber, commune, city, reference, postalcode, phone } = req.body;
+  const { name, lastname, username, email, password, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium } = req.body;
   const emailLowerCase = email.toLowerCase();
   const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
@@ -19,24 +19,12 @@ const signUp = async (req, res) => {
     });
   }
 
-  // encrptamon la password
-
+  // encriptamon la password
   const encryptPassword = hashedPassword(password);
 
   try {
     const user = new User({
-      name,
-      lastname,
-      username,
-      email: emailLowerCase,
-      password: encryptPassword,
-      address,
-      addressNumber,
-      commune,
-      city,
-      reference,
-      postalcode,
-      phone,
+      name, lastname, username, email:emailLowerCase, password:encryptPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
     });
     const response = await user.save();
     const token = generateToken(response);
@@ -71,51 +59,49 @@ const getUsers = async (req, res) => {
   }
 };
 
-// Actualiza datos de usuario
-const updateUser = async (req, res) => {
-  const { _id, userUpdated } = req.body;
-  console.log(_id, userUpdated);
-  try {
-    const response = await User.findByIdAndUpdate(_id, userUpdated, {
-      new: true,
-    });
-    return res.status(200).json({
-      message: "Ok",
-      detail: response,
-    });
-  } catch (err) {
-    return res.status(404).json({
-      message: "Internal Server Error",
-      detail: err,
-    });
-  }
-};
+// // Actualiza datos de usuario
+// const updateUser = async (req, res) => {
+//   const { _id, userUpdated } = req.body;
+//   console.log(_id, userUpdated);
+//   try {
+//     const response = await User.findByIdAndUpdate(_id, userUpdated, {
+//       new: true,
+//     });
+//     return res.status(200).json({
+//       message: "Ok",
+//       detail: response,
+//     });
+//   } catch (err) {
+//     return res.status(404).json({
+//       message: "Internal Server Error",
+//       detail: err,
+//     });
+//   }
+// };
 
-// Elimina datos de usuario
-const deleteUser = async (req, res) => {
-  const { _id } = req.body;
+// // Elimina datos de usuario
+// const deleteUser = async (req, res) => {
+//   const { _id } = req.body;
 
-  try {
-    const response = await User.findByIdAndDelete(_id);
+//   try {
+//     const response = await User.findByIdAndDelete(_id);
 
-    return res.status(200).json({
-      message: "Ok",
-      detail: response,
-    });
-  } catch (err) {
-    return res.status(404).json({
-      message: "Internal Server Error",
-      detail: err,
-    });
-  }
-};
+//     return res.status(200).json({
+//       message: "Ok",
+//       detail: response,
+//     });
+//   } catch (err) {
+//     return res.status(404).json({
+//       message: "Internal Server Error",
+//       detail: err,
+//     });
+//   }
+// };
 
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-
   const emailLowerCase = email.toLowerCase();
-
   const passwordHash = hashedPassword(password);
 
   try {
@@ -229,8 +215,6 @@ const updateUserById = async (req, res) => {
 module.exports = {
   signUp,
   getUsers,
-  updateUser,
-  deleteUser,
   login,
   getUserById,
   updateUserById,

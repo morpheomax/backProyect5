@@ -1,4 +1,5 @@
 require("dotenv").config();
+// Desencriptar el token
 const { expressjwt } = require("express-jwt");
 const secret = process.env.JWT_SECRET_KEY;
 
