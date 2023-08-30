@@ -189,26 +189,32 @@ const updateUserById = async (req, res) => {
 
   // Hash the password before updating
   const hashedPassword = hashedPassword(password);
-
+console.log(_id)
+console.log(userUpdated)
+console.log(password)
   try {
     const user = await User.findByIdAndUpdate(
       _id,
       { ...userUpdated, password: hashedPassword },
       { new: true }
-    );
+      );
+      console.log(user)
     if (user) {
       return res.status(200).json({
         message: "User updated successfully",
         detail: user,
       });
+      console.log(res.status)
     }
     return res.status(404).json({
       message: "User not found",
     });
+    console.log(res.status)
   } catch (err) {
     return res.status(500).json({
       message: "Server Error",
     });
+    console.log(err)
   }
 };
 
