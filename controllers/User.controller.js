@@ -192,6 +192,7 @@ const updateUserById = async (req, res) => {
 console.log(_id)
 console.log(userUpdated)
 console.log(password)
+console.log(hashedPassword)
   try {
     const user = await User.findByIdAndUpdate(
       _id,
@@ -204,17 +205,17 @@ console.log(password)
         message: "User updated successfully",
         detail: user,
       });
-      console.log(res.status)
     }
+    console.log(res.status)
     return res.status(404).json({
       message: "User not found",
     });
-    console.log(res.status)
+    
   } catch (err) {
+    console.log(err)
     return res.status(500).json({
       message: "Server Error",
     });
-    console.log(err)
   }
 };
 
