@@ -189,35 +189,39 @@ const updateUserById = async (req, res) => {
 
   // Hash the password before updating
   const hashedPassword = hashedPassword(password);
-console.log(_id)
-console.log(userUpdated)
-console.log(password)
-console.log(hashedPassword)
+
+  console.log("_id:", _id); // Agregado
+  console.log("userUpdated:", userUpdated); // Agregado
+  console.log("password:", password); // Agregado
+  console.log("hashedPassword:", hashedPassword); // Agregado
+
   try {
     const user = await User.findByIdAndUpdate(
       _id,
       { ...userUpdated, password: hashedPassword },
       { new: true }
-      );
-      console.log(user)
+    );
+    console.log("Updated User:", user); // Agregado
+
     if (user) {
       return res.status(200).json({
         message: "User updated successfully",
         detail: user,
       });
     }
-    console.log(res.status)
+    console.log("Response Status:", res.status); // Agregado
     return res.status(404).json({
       message: "User not found",
     });
     
   } catch (err) {
-    console.log(err)
+    console.log("Error:", err); // Agregado
     return res.status(500).json({
       message: "Server Error",
     });
   }
 };
+
 
 module.exports = {
   signUp,
