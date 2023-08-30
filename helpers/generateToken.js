@@ -1,13 +1,16 @@
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET_KEY;
+
+// Genera el token con los datos especificados
 const generateToken = (user) => {
-  const { _id, username, name, email, rol, premium } = user;
+  const { _id, username, name, lastname, email, rol, premium } = user;
   //   Retornamos los datos que queremos mostrar en front al cliente al iniciar la sesion
   return jwt.sign(
     {
       _id,
       username,
       name,
+      lastname,
       email,
       rol,
       premium,
@@ -18,6 +21,9 @@ const generateToken = (user) => {
       expiresIn: "1d",
     }
   );
+  
+
+   
 };
 
 module.exports = generateToken;
