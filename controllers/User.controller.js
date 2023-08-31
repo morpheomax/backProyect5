@@ -184,7 +184,7 @@ const deleteUserById = async (req, res) => {
 // Actualiza un usuario por su ID
 const updateUserById = async (req, res) => {
   const { _id } = req.params;
-  const { userUpdated } = req.body;
+  const  userUpdated  = req.body;
   const { password } = userUpdated;
 
   // Hash the password before updating
