@@ -61,13 +61,13 @@ app.get("/", (req, res) => {
   });
 });
 
-// Manejo de errores global
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    message: "Ha ocurrido un error en el servidor",
-  });
-});
+// // Manejo de errores global
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   res.status(500).json({
+//     message: "Ha ocurrido un error en el servidor",
+//   });
+// });
 
 // Escuchar en el puerto
 app.listen(port, () => {
