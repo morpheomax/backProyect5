@@ -82,7 +82,8 @@ const updateCategoryById = async (req, res) => {
       categoryId,
       categoryUpdated,
       { new: true }
-    );
+    ); console.log(categoryId);
+    console.log(categoryUpdated);
     if (category) {
       return res.status(200).json({
         message: "Category updated successfully",
