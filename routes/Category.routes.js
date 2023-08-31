@@ -12,10 +12,10 @@ const {
 } = require('../controllers/Category.controller');
 
 // Rutas para Categorías
-router.post("/categories", auth, createCategory); 
-router.get("/categories", getCategories);
-router.get("/categories/:categoryId", getCategoryById); 
-router.put("/categories/:categoryId", auth, updateCategoryById); 
-router.delete("/categories/:categoryId", auth, deleteCategoryById); 
+router.post("/", auth, createCategory); 
+router.get("/", getCategories);
+router.get("/:categoryId", getCategoryById); 
+router.put("/:categoryId", auth, updateCategoryById); 
+router.delete("/:categoryId", auth, deleteCategoryById); 
 
 module.exports = router;
