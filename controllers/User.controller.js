@@ -20,11 +20,11 @@ const signUp = async (req, res) => {
   }
 
   // encriptamon la password
-  const hashPassword = hashedPassword(password);
+  const hashedPassword = hashedPassword(password);
 
   try {
     const user = new User({
-      name, lastname, username, email:emailLowerCase, password:hashPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
+      name, lastname, username, email:emailLowerCase, password:hashedPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
     });
     const response = await user.save();
     const token = generateToken(response);
@@ -188,17 +188,17 @@ const updateUserById = async (req, res) => {
   const { password } = userUpdated;
 
   // Hash the password before updating
-  const hashPassword = hashedPassword(password);
+  const hashedPassword = hashedPassword(password);
 
   console.log("_id:", _id); // Agregado
   console.log("userUpdated:", userUpdated); // Agregado
   console.log("password:", password); // Agregado
-  console.log("hashedPassword:", hashPassword); // Agregado
+  console.log("hashedPassword:", hashedPassword); // Agregado
 
   try {
     const user = await User.findByIdAndUpdate(
       _id,
-      { ...userUpdated, password: hashPassword },
+      { ...userUpdated, password: hashedPassword },
       { new: true }
     );
     console.log("Updated User:", user); // Agregado
