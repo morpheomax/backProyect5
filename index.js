@@ -46,7 +46,7 @@ const storeRoutes = require("./routes/Store.routes");
 app.use(cors(corsOptions)) // Habilitar CORS para todas las rutas
 app.use(express.json());
 
-// Rutas
+// Rutas 
 
 app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);

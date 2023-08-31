@@ -5,8 +5,8 @@ const auth = require("../middlewares/auth");
 // Categorías
 const {
   createCategory,
-  getCategoryById,
   getCategories,
+  getCategoryById,
   updateCategoryById,
   deleteCategoryById,
 } = require('../controllers/Category.controller');
