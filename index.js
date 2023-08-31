@@ -22,6 +22,7 @@ mongoose
 })
 .catch((error) => {
     console.error("Error de conexión a MongoDB:", error);
+    process.exit(1); // Detener el servidor en caso de error crítico de conexión
   });
 
   // Importar modelos antes de las rutas
@@ -60,7 +61,13 @@ app.get("/", (req, res) => {
   });
 });
 
-
+// Manejo de errores global
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    message: "Ha ocurrido un error en el servidor",
+  });
+});
 
 // Escuchar en el puerto
 app.listen(port, () => {
