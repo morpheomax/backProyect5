@@ -20,11 +20,11 @@ const signUp = async (req, res) => {
   }
 
   // encriptamon la password
-  const hashedPassword = hashedPassword(password);
+  const hashPassword = hashedPassword(password);
 
   try {
     const user = new User({
-      name, lastname, username, email:emailLowerCase, password:hashedPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
+      name, lastname, username, email:emailLowerCase, password:hashPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
     });
     const response = await user.save();
     const token = generateToken(response);

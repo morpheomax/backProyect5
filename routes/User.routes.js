@@ -42,10 +42,6 @@ router.put("/:_id", auth, updateUserById);
 router.delete("/:_id", auth, deleteUserById);
 
 
-// // Verificamos el rol del usuario (confrimar si es correcto o lo quito)
-// router.put("/admin/", auth, checkRole(["SuperAdmin", "Admin"]), adminController.getAdminPage);
-// router.put("/vendedor", auth, checkRole(["vendedor"]), vendedorController.getVendedorPage);
-// router.put("/user", auth, checkRole(["cliente"]), vendedorController.getVendedorPage);
 
 
 module.exports = router;
