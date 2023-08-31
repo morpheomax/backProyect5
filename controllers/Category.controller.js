@@ -1,11 +1,13 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const Category = mongoose.model("Category");
+// const Category = mongoose.model("Category");
+
+const {Category} = require('../models/Category.models')
 
 // Crear categoría
 const createCategory = async (req, res) => {
   const { name, description, subcategories } = req.body;
-
+console.log(req.body)
   try {
     const category = new Category({
       name,
@@ -116,7 +118,7 @@ const deleteCategoryById = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       message: "Internal Server Error",
-      detail: err.message, 
+      detail: err.message, // Esto mostrará el mensaje de error específico
     });
   }
 };
