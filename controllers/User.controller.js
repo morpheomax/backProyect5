@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 // recibe req y res
 // Esta función recibe una solicitud (req) y una respuesta (res). Crea un nuevo documento de usuario en la base de datos utilizando el modelo de Mongoose y devuelve una respuesta con el estado 201 (creado) y los detalles del usuario creado en el cuerpo de la respuesta.
 const signUp = async (req, res) => {
-  
+  concole.log(req.body)
   const { name, lastname, username, email, password, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium } = req.body;
   const emailLowerCase = email.toLowerCase();
   const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -20,11 +20,11 @@ const signUp = async (req, res) => {
   }
 
   // encriptamon la password
-  const hashedPassword = hashedPassword(password);
+  const hashPassword = hashedPassword(password);
 
   try {
     const user = new User({
-      name, lastname, username, email:emailLowerCase, password:hashedPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
+      name, lastname, username, email:emailLowerCase, password:hashPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
     });
     const response = await user.save();
     const token = generateToken(response);
