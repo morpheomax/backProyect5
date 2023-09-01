@@ -190,11 +190,7 @@ const updateUserById = async (req, res) => {
   // Hash the password before updating
   const hashPassword = hashedPassword(password);
 
-  console.log("_id:", _id); // Agregado
-  console.log("userUpdated:", userUpdated); // Agregado
-  console.log("password:", password); // Agregado
-  console.log("hashedPassword:", hashPassword); // Agregado
-
+  
   try {
     const user = await User.findByIdAndUpdate(
       _id,

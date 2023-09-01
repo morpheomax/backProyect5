@@ -75,12 +75,13 @@ const getCategories = async (req, res) => {
 // Actualizar categoría por id
 const updateCategoryById = async (req, res) => {
   const { categoryId } = req.params;
-  const { categoryUpdated } = req.body;
+  const  categoryUpdated  = req.body;
 
   try {
+    // updateOne
     const category = await Category.findByIdAndUpdate(
       categoryId,
-      categoryUpdated,
+      {...categoryUpdated},
       { new: true }
     ); console.log(categoryId);
     console.log(categoryUpdated);
