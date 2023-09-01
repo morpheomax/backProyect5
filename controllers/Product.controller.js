@@ -6,8 +6,8 @@ const Product = mongoose.model("Product");
 const createProduct = async (req, res) => {
   const {
     idUser,
-    sku,
     img,
+    sku,
     name,
     description,
     category,
@@ -21,8 +21,8 @@ const createProduct = async (req, res) => {
   try {
     const product = new Product({
       idUser,
-      sku,
       img,
+      sku,
       name,
       description,
       category,
