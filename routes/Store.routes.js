@@ -5,9 +5,10 @@ const auth = require("../middlewares/auth");
 // Información de la tienda
 const {
     createStore,
-    getStore,
-    updateStore,
-    deleteStore,
+  getStore,
+  
+  updateStore,
+  deleteStore,
 
 } = require('../controllers/Store.controller')
 
@@ -15,6 +16,7 @@ const {
 
 router.post("/", auth, createStore); 
 router.get("/", getStore);
+
 router.put("/:id", auth, updateStore); 
 router.delete("/:id", auth, deleteStore); 
 

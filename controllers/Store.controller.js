@@ -30,19 +30,33 @@ const createStore = async (req, res) => {
   }
 };
 
-// Obtener tienda por ID
+// Obtener Tienda completa
 const getStore = async (req, res) => {
-  const storeId = req.params.id;
+  try {
+    const response = await Store.find();
+    return res.status(200).json({
+      message: "Ok",
+      detail: response,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: "Internal Server Error",
+      detail: err,
+    });
+  }
+};
 
+
+// Obtener tienda por ID
+const getStoreById = async (req, res) => {
+  const storeId = req.params.id;
   try {
     const store = await Store.findById(storeId);
-
     if (!store) {
       return res.status(404).json({
         message: "Store not found",
       });
     }
-
     return res.status(200).json({
       store,
     });
@@ -112,6 +126,7 @@ const deleteStore = async (req, res) => {
 module.exports = {
   createStore,
   getStore,
+  getStoreById,
   updateStore,
   deleteStore,
 };
