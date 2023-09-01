@@ -4,7 +4,7 @@ const ProductSchema = new mongoose.Schema(
   {
     idUser: {
       type: String,
-      required: false,
+      
     },
    
     sku: {
@@ -21,11 +21,11 @@ const ProductSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      required: false,
+      
     },
     subcategory: {
       type: String,
-      required: false,
+      
     },
     stock: {
       type: Number,
@@ -37,7 +37,7 @@ const ProductSchema = new mongoose.Schema(
     },
     variants: {
       type: String, 
-      required: false,
+      
     },
     favorite:{
       type:[String]
