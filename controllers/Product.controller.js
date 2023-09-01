@@ -63,7 +63,7 @@ const getProduct = async (req, res) => {
 
 
 
-
+// Buscar por ID
 const getProductById = async (req, res) => {
   const { productId } = req.params;
 
@@ -86,6 +86,7 @@ const getProductById = async (req, res) => {
   }
 }
 
+// Actualizar por ID
 const updateProductById = async (req, res) => {
   const { productId } = req.params;
   const productUpdated  = req.body;
@@ -114,6 +115,7 @@ const updateProductById = async (req, res) => {
   }
 }
 
+// Eliminar
 const deleteProductById = async (req, res) => {
   const { productId } = req.params;
 
