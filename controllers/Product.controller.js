@@ -86,14 +86,15 @@ const getProductById = async (req, res) => {
 
 const updateProductById = async (req, res) => {
   const { productId } = req.params;
-  const { productUpdated } = req.body;
+  const productUpdated  = req.body;
 
   try {
     const product = await Product.findByIdAndUpdate(
       productId,
-      productUpdated,
+      {...productUpdated},
       { new: true }
     );
+    console.log(productUpdated);
     if (product) {
       return res.status(200).json({
         message: "Product updated successfully",

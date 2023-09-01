@@ -46,14 +46,15 @@ const getVariants = async (req, res) => {
 
 const updateVariants = async (req, res) => {
   const { variantsId } = req.params;
-  const { variantsUpdated } = req.body;
+  const  variantsUpdated  = req.body;
 
   try {
     const variants = await Variants.findByIdAndUpdate(
       variantsId,
-      variantsUpdated,
+      {...variantsUpdated},
       { new: true }
     );
+    console.log(variantsUpdated)
 
     if (variants) {
       return res.status(200).json({

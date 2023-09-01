@@ -65,7 +65,7 @@ const updateStore = async (req, res) => {
       updates,
       { new: true } // Para obtener la tienda actualizada
     );
-
+    console.log(updates);
     if (!store) {
       return res.status(404).json({
         message: "Store not found",
