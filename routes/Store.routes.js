@@ -13,9 +13,9 @@ const {
 
 // Rutas para información de la tienda
 
-router.post("/store", auth, createStore); 
-router.get("/store", getStore);
-router.put("/store/:id", auth, updateStore); 
-router.delete("/store/:id", auth, deleteStore); 
+router.post("/", auth, createStore); 
+router.get("/", getStore);
+router.put("/:id", auth, updateStore); 
+router.delete("/:id", auth, deleteStore); 
 
 module.exports = router;
