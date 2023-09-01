@@ -33,7 +33,7 @@ const ProductSchema = new mongoose.Schema(
     },
     variants: {
       type: String, 
-      required: true,
+      required: false,
     },
     favorite:{
       type:[String]
