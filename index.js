@@ -7,7 +7,11 @@ const app = express();
 const port = process.env.PORT || 3000; // Puerto por defecto 3000 si no está definido en las variables de entorno
 
 const corsOptions ={
-  origin: process.env.FRONTEND_URL,
+  // No es buena practica, pero esta vez la utilizare solo para realizar pruebas en producción de mi sitio, luego se debe comentar y descomentar el siguiente origin
+  origin: ['http://localhost:5173', 'https://proy5-ecommerce.netlify.app'],
+
+  // cuando pase a produccion descomentar el siguietne origin
+  // origin: process.env.FRONTEND_URL,
   optionSuccessStatus: 200
 }
 
