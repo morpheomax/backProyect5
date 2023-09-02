@@ -219,6 +219,91 @@ const updateUserById = async (req, res) => {
 };
 
 
+// Controlador para obtener los datos del usuario logueado
+const getUserProfile = async (req, res) => {
+  try {
+    // Recupera el usuario desde el objeto de solicitud (req) 
+    // Este usuario se añade previamente a la solicitud en el middleware de autenticación
+    const user = req.user;
+
+    // Verifica si se encontró un usuario
+    if (!user) {
+      return res.status(404).json({
+        message: "Usuario no encontrado",
+      });
+    }
+
+    // Realiza cualquier verificación de seguridad necesaria aquí.
+    // Por ejemplo, podrías comprobar si el usuario tiene permisos para acceder a esta información.
+
+    // Devuelve los datos del usuario logueado como respuesta
+    res.json({
+      message: 'OK',
+      detail: user,
+    });
+  } catch (error) {
+    console.error('Error al obtener el perfil del usuario:', error);
+    res.status(500).json({
+      message: 'Error en el servidor',
+      error: error.message,
+    });
+  }
+};
+
+
+const updateUserProfile = async (req, res) => {
+  try {
+    // Recupera el usuario desde el objeto de solicitud (req) 
+    // Este usuario se añade previamente a la solicitud en el middleware de autenticación
+    const user = req.user;
+
+    // Verifica si el cuerpo de la solicitud contiene datos válidos para actualizar
+    if (!req.body) {
+      return res.status(400).json({ error: 'Datos de actualización faltantes' });
+    }
+
+    // Actualiza los campos del usuario con los datos proporcionados en el cuerpo de la solicitud
+    Object.assign(user, req.body);
+
+    // Guarda el usuario actualizado en la base de datos
+    await user.save();
+
+    // Devuelve los datos del usuario actualizados como respuesta
+    res.json(user);
+  } catch (error) {
+    console.error('Error al actualizar el perfil del usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+// Controlador para eliminar el perfil del usuario logueado
+const deleteUserProfile = async (req, res) => {
+  try {
+    // Recupera el usuario desde el objeto de solicitud (req) 
+    // Este usuario se añade previamente a la solicitud en el middleware de autenticación
+    const user = req.user;
+
+    // Verifica si se encontró un usuario
+    if (!user) {
+      return res.status(404).json({
+        message: "Usuario no encontrado",
+      });
+    }
+
+    // Elimina el usuario de la base de datos
+    await user.remove();
+
+    // Devuelve una respuesta exitosa
+    res.json({ message: 'Perfil de usuario eliminado exitosamente' });
+  } catch (error) {
+    console.error('Error al eliminar el perfil del usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+
+
+
 module.exports = {
   signUp,
   getUsers,
@@ -226,4 +311,8 @@ module.exports = {
   getUserById,
   updateUserById,
   deleteUserById,
+
+  getUserProfile,
+  updateUserProfile,
+  deleteUserProfile,
 };
