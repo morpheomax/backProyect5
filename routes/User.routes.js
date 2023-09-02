@@ -9,9 +9,9 @@ const {
   getUserById,
   updateUserById,
   deleteUserById,
-  getUserProfile,
-  updateUserProfile,
-  deleteUserProfile,
+  // getUserProfile,
+  // updateUserProfile,
+  // deleteUserProfile,
 } = require("../controllers/User.controller");
 const auth = require("../middlewares/auth");
 
@@ -45,9 +45,9 @@ router.put("/:_id", auth, updateUserById);
 router.delete("/:_id", auth, deleteUserById);
 
 // Rutas autenticadas para obtener, actualizar y eliminar el perfil del usuario logueado
-router.get("/me", auth, getUserProfile);
-router.put("/me", auth, updateUserProfile);
-router.delete("/me", auth, deleteUserProfile);
+// router.get("/me", auth, getUserProfile);
+// router.put("/me", auth, updateUserProfile);
+// router.delete("/me", auth, deleteUserProfile);
 
 
 
