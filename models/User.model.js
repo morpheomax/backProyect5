@@ -66,7 +66,7 @@ const UserSchema = new mongoose.Schema(
     rol: {
       type: String,
       required: false,
-      default: "cliente",
+      default: "Cliente",
     },
     premium: {
       type: Boolean,
