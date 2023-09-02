@@ -8,7 +8,7 @@ const httpServer = createServer(app);
 
 // Configura SSE
 const sse = new Server(httpServer, {
-  path: "/sse", // Ruta para las conexiones SSE
+  path: "/events", // Ruta para las conexiones SSE
 });
 
 // Maneja las conexiones SSE
