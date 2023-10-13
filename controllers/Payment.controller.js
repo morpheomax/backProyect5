@@ -25,9 +25,9 @@ const createPayment=async(req,res)=>{
             items,
             // Rutas de retorno en el front
             back_urls:{
-            success: 'http://localhost:5173/success-payment',
-            pending: 'http://localhost:5173/pending-payment',
-            failure: 'http://localhost:5173/failure-payment',
+            success: 'https://proy5-ecommerce.netlify.app/success-payment',
+            pending: 'https://proy5-ecommerce.netlify.app/pending-payment',
+            failure: 'https://proy5-ecommerce.netlify.app/failure-payment',
             }
         }
         const response= await mercadoPago.preferences.create(preference)
