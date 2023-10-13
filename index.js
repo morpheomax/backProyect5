@@ -44,11 +44,13 @@ const variantsRoutes = require("./routes/Variants.routes");
 const productRoutes = require("./routes/Product.routes");
 const contactRoutes = require("./routes/Contact.routes");
 const storeRoutes = require("./routes/Store.routes");
+const paymentRoutes = require("./routes/Payment.routes");
 
 // Middleware
 
 app.use(cors(corsOptions)) // Habilitar CORS para todas las rutas
 app.use(express.json());
+
 
 // Rutas 
 
@@ -58,6 +60,7 @@ app.use("/variants", variantsRoutes);
 app.use("/products", productRoutes);
 app.use("/contact", contactRoutes);
 app.use("/store", storeRoutes);
+app.use('/payment', paymentRoutes )
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -78,3 +81,4 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
 });
+

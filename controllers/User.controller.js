@@ -20,11 +20,16 @@ const signUp = async (req, res) => {
   }
 
   // encriptamon la password
-  const hashPassword = hashedPassword(password);
+  // -- Original
+  // const hashPassword = hashedPassword(password);
+
+  // Modificada
+  const hashedPassword = await bcrypt.hash(password, 10); 
+
 
   try {
     const user = new User({
-      name, lastname, username, email:emailLowerCase, password:hashPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
+      name, lastname, username, email:emailLowerCase, password:hashedPassword, address, addressNumber, commune, city, reference, postalcode, phone, rol, premium
     });
     const response = await user.save();
     const token = generateToken(response);
@@ -59,44 +64,6 @@ const getUsers = async (req, res) => {
   }
 };
 
-// // Actualiza datos de usuario
-// const updateUser = async (req, res) => {
-//   const { _id, userUpdated } = req.body;
-//   console.log(_id, userUpdated);
-//   try {
-//     const response = await User.findByIdAndUpdate(_id, userUpdated, {
-//       new: true,
-//     });
-//     return res.status(200).json({
-//       message: "Ok",
-//       detail: response,
-//     });
-//   } catch (err) {
-//     return res.status(404).json({
-//       message: "Internal Server Error",
-//       detail: err,
-//     });
-//   }
-// };
-
-// // Elimina datos de usuario
-// const deleteUser = async (req, res) => {
-//   const { _id } = req.body;
-
-//   try {
-//     const response = await User.findByIdAndDelete(_id);
-
-//     return res.status(200).json({
-//       message: "Ok",
-//       detail: response,
-//     });
-//   } catch (err) {
-//     return res.status(404).json({
-//       message: "Internal Server Error",
-//       detail: err,
-//     });
-//   }
-// };
 
 
 const login = async (req, res) => {
@@ -117,7 +84,13 @@ const login = async (req, res) => {
     console.log(`${userValidated.password} vs ${passwordHash}`);
 
     // Validar Password compara la contraseña proporcionada con la contraseña hash almacenada
-    if (userValidated.password === passwordHash) {
+    // Original
+    // if (userValidated.password === passwordHash) 
+    
+    // -- Modificada
+    const passwordMatch = await bcrypt.compare(password, userValidated.password);
+if (passwordMatch) {
+
       console.log(`coinciden`);
 
       const token = generateToken(userValidated);
@@ -218,6 +191,37 @@ const updateUserById = async (req, res) => {
   }
 };
 
+// // Controlador para cambiar la contraseña del usuario logueado
+// const changePassword = async (req, res) => {
+//   try {
+//     const { oldPassword, newPassword } = req.body;
+//     const user = req.user; // Obtener el usuario logueado desde el middleware de autenticación
+
+//     // Verificar la contraseña anterior
+//     const passwordMatch = await bcrypt.compare(oldPassword, user.password);
+
+//     if (!passwordMatch) {
+//       return res.status(401).json({
+//         message: "La contraseña anterior es incorrecta",
+//       });
+//     }
+
+//     // Generar un nuevo hash para la nueva contraseña
+//     const newHashedPassword = await bcrypt.hash(newPassword, 10);
+
+//     // Actualizar la contraseña en la base de datos
+//     user.password = newHashedPassword;
+//     await user.save();
+
+//     return res.status(200).json({
+//       message: "Contraseña cambiada exitosamente",
+//     });
+//   } catch (error) {
+//     console.error("Error al cambiar la contraseña:", error);
+//     res.status(500).json({ error: "Error interno del servidor" });
+//   }
+// };
+
 
 // // Controlador para obtener los datos del usuario logueado
 // const getUserProfile = async (req, res) => {
@@ -312,6 +316,7 @@ module.exports = {
   updateUserById,
   deleteUserById,
 
+  // changePassword
   // getUserProfile,
   // updateUserProfile,
   // deleteUserProfile,
